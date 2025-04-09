@@ -1,0 +1,14 @@
+d252eb377c907b40a9bb002133db325dfc376a00
+89ffd9e6ad6f9b3ca8d59fc482413d2953a26a72 
+b73e6459b65a770856949cf6461f5afc91f3ae1c cnn_train.py
+58bc334d0e9881a32ea0beece5fd709f162b3623 data
+f1a1e1de7dd3c8caaab885bb89c5ca108c124785 data/cifar-10-batches-py
+4467a6ec2e886a9f14f25e31776fb0152d8ac64a data/cifar-10-batches-py/batches.meta
+ab404a5ac32492b807a5c6cd02b83dc4dd5ff980 data/cifar-10-batches-py/data_batch_1
+6bf1369a6cacadfdbd2f8c61e354cc7d0c17bbae data/cifar-10-batches-py/data_batch_2
+66a0d630a7eb736563b1861ce716bdc489f2113b data/cifar-10-batches-py/data_batch_3
+cf8d03d1e80e6d9e440d1764faa85aedd1d6b960 data/cifar-10-batches-py/data_batch_4
+468b2aa538c551bc9f590f213b19d96915b85062 data/cifar-10-batches-py/data_batch_5
+e377adef45c85dc91051edf2dee72c1d4d57732c data/cifar-10-batches-py/readme.html
+3e03f1fc5261d102600fc1c130454f1f5cda567b data/cifar-10-batches-py/test_batch
+90c5365492dea3b3c855b2375f1de8588ac1bda4 data/cifar-10-python.tar.gz
