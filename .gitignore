@@ -1,1 +1,21 @@
-data/cifar-10-python.tar.gz
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+*.ipynb_checkpoints
+
+# Virtual environments
+venv/
+.env/
+
+# PyTorch model checkpoints
+*.pth
+
+# CIFAR-10 dataset
+data/
+
+# etc cache
+*.cache
