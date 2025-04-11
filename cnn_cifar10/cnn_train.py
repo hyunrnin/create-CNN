@@ -47,6 +47,7 @@ def main():
             return x
 
     model = CNNModel().to(device)
+    print(f"Model is on device: {next(model.parameters()).device}")  # 디바이스 출력
 
     # 손실 함수, 옵티마이저 설정
     criterion = nn.CrossEntropyLoss()
@@ -58,8 +59,14 @@ def main():
 
     for epoch in range(num_epochs):
         running_loss = 0.0
-        for images, labels in trainloader:
+        model.train()
+
+        for i, (images, labels) in enumerate(trainloader):
             images, labels = images.to(device), labels.to(device)
+
+            # 첫 배치에서 디바이스 확인
+            if epoch == 0 and i == 0:
+                print(f"[Debug] Batch 0 - images device: {images.device}, labels device: {labels.device}")
 
             optimizer.zero_grad()
             outputs = model(images)
