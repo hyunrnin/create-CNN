@@ -1,5 +1,3 @@
-# 학습 + 평가 스크립트
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -8,7 +6,11 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 from model import GoogLeNet
 
-# 데이터 로딩
+# GPU 장치 설정
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
+
+# 데이터 전처리 및 로딩
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -22,10 +24,9 @@ test_dataset = datasets.CIFAR10(root='./data', train=False, download=True, trans
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
-# 모델, 손실 함수, 옵티마이저
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# 모델 및 손실 함수, 옵티마이저 설정
 model = GoogLeNet().to(device)
-criterion = nn.CrossEntropyLoss()
+criterion = nn.CrossEntropyLoss().to(device)
 optimizer = optim.Adam(model.parameters(), lr=0.0002)
 
 # 학습 루프
@@ -48,7 +49,7 @@ for epoch in range(num_epochs):
     train_losses.append(avg_loss)
     print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")
 
-# Loss 시각화
+# Loss 그래프 저장 및 출력
 plt.plot(range(1, num_epochs+1), train_losses, marker='o')
 plt.title('Training Loss over Epochs')
 plt.xlabel('Epoch')
