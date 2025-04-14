@@ -6,8 +6,19 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 
 def main():
-    # GPU 사용 설정
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # GPU 강제 사용 설정
+    if torch.cuda.is_available():
+        try:
+            device = torch.device("cuda")
+            torch.cuda.current_device()  # 예외 발생 유도
+            print("CUDA 사용: ", torch.cuda.get_device_name(0))
+        except Exception as e:
+            print("CUDA 디바이스 확인 실패, CPU로 대체합니다.", e)
+            device = torch.device("cpu")
+    else:
+        print("CUDA 사용 불가 - CPU로 전환됩니다.")
+        device = torch.device("cpu")
+    
     print("Using device:", device)
 
     # 데이터 전처리
@@ -39,15 +50,15 @@ def main():
             self.relu = nn.ReLU()
 
         def forward(self, x):
-            x = self.pool(self.relu(self.conv1(x)))  # [batch, 32, 16, 16]
-            x = self.pool(self.relu(self.conv2(x)))  # [batch, 64, 8, 8]
+            x = self.pool(self.relu(self.conv1(x)))
+            x = self.pool(self.relu(self.conv2(x)))
             x = x.view(-1, 64 * 8 * 8)
             x = self.relu(self.fc1(x))
             x = self.fc2(x)
             return x
 
     model = CNNModel().to(device)
-    print(f"Model is on device: {next(model.parameters()).device}")  # 디바이스 출력
+    print(f"Model is on device: {next(model.parameters()).device}")
 
     # 손실 함수, 옵티마이저 설정
     criterion = nn.CrossEntropyLoss()
@@ -64,9 +75,8 @@ def main():
         for i, (images, labels) in enumerate(trainloader):
             images, labels = images.to(device), labels.to(device)
 
-            # 첫 배치에서 디바이스 확인
             if epoch == 0 and i == 0:
-                print(f"[Debug] Batch 0 - images device: {images.device}, labels device: {labels.device}")
+                print(f"Batch 0 - images device: {images.device}, labels device: {labels.device}")
 
             optimizer.zero_grad()
             outputs = model(images)
