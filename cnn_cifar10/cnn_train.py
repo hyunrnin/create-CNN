@@ -10,7 +10,7 @@ def main():
     if torch.cuda.is_available():
         try:
             device = torch.device("cuda")
-            torch.cuda.current_device()  # 예외 발생 유도
+            torch.cuda.current_device()
             print("CUDA 사용: ", torch.cuda.get_device_name(0))
         except Exception as e:
             print("CUDA 디바이스 확인 실패, CPU로 대체합니다.", e)
