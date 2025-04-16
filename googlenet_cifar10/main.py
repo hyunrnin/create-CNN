@@ -6,8 +6,10 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 from model import GoogLeNet
 
-# GPU 장치 설정
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# GPU 강제 사용 설정
+if not torch.cuda.is_available():
+    raise RuntimeError("CUDA is not available. GPU 환경에서 실행해주세요.")
+device = torch.device("cuda")
 print(f"Using device: {device}")
 
 # 데이터 전처리 및 로딩
