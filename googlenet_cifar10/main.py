@@ -26,7 +26,7 @@ test_dataset = datasets.CIFAR10(root='./data', train=False, download=True, trans
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
-# 모델 및 손실 함수, 옵티마이저 설정
+# 모델, 손실 함수, 옵티마이저 설정
 model = GoogLeNet().to(device)
 criterion = nn.CrossEntropyLoss().to(device)
 optimizer = optim.Adam(model.parameters(), lr=0.0002)
